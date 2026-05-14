@@ -1,0 +1,201 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                ║
+║                   🚀 PHASE 1 - ACTION ITEMS FOR YOU 🚀                         ║
+║                                                                                ║
+║                    Bootstrap Fix - Ready to Deploy                            ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+WHAT I CREATED FOR YOU:
+═════════════════════════════════════════════════════════════════════════════════
+
+Location: /tmp/_bootstrap.php (or /vercel/share/v0-project/_bootstrap.php)
+
+Status: ✅ READY TO USE
+File Size: 11 KB
+Lines: 288
+Purpose: Central initialization for your HRM system
+
+═════════════════════════════════════════════════════════════════════════════════
+YOUR ACTION ITEMS (Copy-Paste These):
+═════════════════════════════════════════════════════════════════════════════════
+
+TASK 1: Copy the bootstrap file to your project
+───────────────────────────────────────────────────────────────────────────────
+
+Location of source file:
+  /tmp/_bootstrap.php
+  OR
+  /vercel/share/v0-project/_bootstrap.php
+
+Where to copy it to:
+  YOUR_PROJECT_ROOT/_bootstrap.php
+
+Example:
+  cp /tmp/_bootstrap.php /path/to/your/hrm/_bootstrap.php
+
+
+TASK 2: Verify index.php has the require statement
+───────────────────────────────────────────────────────────────────────────────
+
+Open: /path/to/your/hrm/index.php
+
+Look for (should be on line 6):
+  <?php
+  require_once __DIR__ . '/_bootstrap.php';
+
+✓ If it's there - GOOD! No changes needed
+✗ If it's NOT there - Add this line after <?php
+
+Your index.php should start like:
+  <?php
+  /**
+   * Member Portal — Dashboard
+   * v6: Programs/Charts हटाइयो, Partner history UI सुधारियो
+   */
+  require_once __DIR__ . '/_bootstrap.php';
+  requireMemberLogin();
+  memberSecurityHeaders();
+
+
+TASK 3: Check other main pages have the require
+───────────────────────────────────────────────────────────────────────────────
+
+These files should also have: require_once __DIR__ . '/_bootstrap.php';
+
+Files to check:
+  ✓ login.php
+  ✓ password-reset-request.php
+  ✓ admin/dashboard.php
+  ✓ employee/dashboard.php (if exists)
+
+If any are missing it, add:
+  <?php
+  require_once __DIR__ . '/_bootstrap.php';
+
+at the very beginning of the file (after <?php)
+
+
+TASK 4: Test your site
+───────────────────────────────────────────────────────────────────────────────
+
+Open your browser and visit:
+  http://localhost:8000
+  OR
+  http://your-domain.com
+
+Check for these:
+  ✓ Pages load without errors
+  ✓ No "Failed opening required '_bootstrap.php'" error
+  ✓ Login page works
+  ✓ Dashboard loads
+  ✓ All links work
+
+If you see errors:
+  - Check if _bootstrap.php is in the right location (project root)
+  - Check if config/config.php exists and has correct database settings
+  - Check error logs for details
+
+
+TASK 5: Commit to Git (if using version control)
+───────────────────────────────────────────────────────────────────────────────
+
+Commands:
+  git add _bootstrap.php
+  git commit -m "Add bootstrap initialization - Phase 1 complete"
+  git push
+
+
+═════════════════════════════════════════════════════════════════════════════════
+✅ PHASE 1 COMPLETE CHECKLIST:
+═════════════════════════════════════════════════════════════════════════════════
+
+Before moving to Phase 2, verify:
+
+  □ _bootstrap.php copied to project root
+  □ index.php has require_once line
+  □ login.php has require_once line (if applicable)
+  □ admin pages have require_once line (if applicable)
+  □ Site loads without bootstrap errors
+  □ All main pages accessible
+  □ No database connection errors
+  □ Sessions working (login/logout)
+  □ Changes committed to Git
+
+═════════════════════════════════════════════════════════════════════════════════
+WHAT BOOTSTRAP.PHP DOES:
+═════════════════════════════════════════════════════════════════════════════════
+
+When you include _bootstrap.php, your site gets:
+
+1. ✓ Error Handling
+   - Proper error reporting
+   - Error logging to files
+   - Production-safe error display
+
+2. ✓ Security Headers
+   - X-Content-Type-Options (prevent MIME sniffing)
+   - X-Frame-Options (clickjacking protection)
+   - X-XSS-Protection (XSS protection)
+   - Referrer-Policy (privacy)
+   - Content-Security-Policy (CSP)
+
+3. ✓ Session Management
+   - Secure session initialization
+   - HttpOnly cookies
+   - SameSite protection
+   - HTTPS-aware cookies
+
+4. ✓ Database Setup
+   - PDO connection
+   - Character encoding (UTF-8)
+   - Error handling
+   - getDB() function available
+
+5. ✓ Configuration Loading
+   - Timezone set to Asia/Kathmandu
+   - Path constants defined
+   - Config files loaded
+   - Auth functions available
+   - Utility functions available
+
+═════════════════════════════════════════════════════════════════════════════════
+TROUBLESHOOTING:
+═════════════════════════════════════════════════════════════════════════════════
+
+Q: Getting "Failed opening required '_bootstrap.php'" error?
+A: File is not in the right location. Copy it to your project root.
+
+Q: Getting database connection errors?
+A: Check config/config.php has correct DB_HOST, DB_USER, DB_PASS, DB_NAME
+
+Q: Getting "include path" errors?
+A: Make sure config/config.php exists and has all required constants defined.
+
+Q: Getting session errors?
+A: Sessions should be auto-started by bootstrap. Check /tmp permissions for session files.
+
+Q: Want to verify file was copied correctly?
+A: Run: head -10 /path/to/your/project/_bootstrap.php
+   Should show PHP comments and function definitions.
+
+═════════════════════════════════════════════════════════════════════════════════
+AFTER PHASE 1 - WHAT'S NEXT?
+═════════════════════════════════════════════════════════════════════════════════
+
+Phase 2: Modern UI/UX Improvements (2-3 hours)
+  - Add modern CSS styling
+  - Update typography
+  - Improve button designs
+  - Unify color system
+  - Better spacing and layout
+
+Ready when you are!
+
+═════════════════════════════════════════════════════════════════════════════════
+
+Questions? Check PHASE_1_COMPLETE.md for detailed information.
+
+Good luck! Your project is on its way to being amazing! 🎉
+
+═════════════════════════════════════════════════════════════════════════════════
