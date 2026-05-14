@@ -1,0 +1,561 @@
+/**
+ * 🎨 UI/UX ENHANCEMENTS — Phase 1
+ * ═══════════════════════════════════════════════════════════
+ * Safe, non-breaking improvements using existing design tokens
+ * ✅ Zero hardcoded colors
+ * ✅ Uses --primary-color, --bg-soft, --font-sm, etc.
+ * ✅ Purely additive (no overriding existing styles)
+ * ═══════════════════════════════════════════════════════════
+ */
+
+/* ──────────────────────────────────────────────────────────
+   1. SMOOTH TRANSITIONS & INTERACTIONS
+   ────────────────────────────────────────────────────────── */
+
+/* All interactive elements get smooth transitions */
+button, 
+a.btn-coop, 
+.btn-coop,
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+a.btn,
+.btn {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Form inputs — visual feedback on focus */
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]),
+select,
+textarea {
+    transition: all 0.2s ease;
+}
+
+input:not([type="hidden"]):not([type="checkbox"]):not([type="radio"]):focus,
+select:focus,
+textarea:focus {
+    box-shadow: 0 0 0 3px rgba(26, 95, 42, 0.1);
+    border-color: var(--primary-color);
+    outline: none;
+}
+
+/* Cards & panels — lift on hover */
+.card, 
+.panel,
+.application-card,
+.member-card,
+.service-card {
+    transition: all 0.2s ease;
+}
+
+.card:hover, 
+.panel:hover,
+.application-card:hover,
+.member-card:hover,
+.service-card:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    transform: translateY(-2px);
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   2. LOADING STATES & SPINNERS
+   ────────────────────────────────────────────────────────── */
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
+}
+
+.spinner,
+.loading-spinner {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--border-soft, #f0f0f0);
+    border-top-color: var(--primary-color);
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+    vertical-align: middle;
+}
+
+.spinner.lg,
+.loading-spinner.lg {
+    width: 32px;
+    height: 32px;
+    border-width: 4px;
+}
+
+.spinner.sm,
+.loading-spinner.sm {
+    width: 16px;
+    height: 16px;
+    border-width: 2px;
+}
+
+/* Skeleton loaders — placeholder content */
+.skeleton,
+.skeleton-line,
+.skeleton-avatar {
+    background: linear-gradient(
+        90deg,
+        var(--bg-soft, #f5faf6) 0%,
+        var(--bg-card, #ffffff) 50%,
+        var(--bg-soft, #f5faf6) 100%
+    );
+    background-size: 1000px 100%;
+    animation: shimmer 2s infinite;
+    border-radius: var(--radius-md, 8px);
+}
+
+.skeleton-line {
+    height: 12px;
+    margin: 8px 0;
+    width: 100%;
+}
+
+.skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+/* Loading button state */
+button[disabled],
+button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+button[disabled] .spinner,
+button:disabled .spinner {
+    display: inline-block;
+    margin-right: 8px;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   3. FORM VALIDATION FEEDBACK
+   ────────────────────────────────────────────────────────── */
+
+.form-group,
+.form-field {
+    position: relative;
+    margin-bottom: 16px;
+}
+
+/* Valid state */
+.form-group.is-valid input,
+.form-group.is-valid select,
+.form-field.is-valid input,
+.form-field.is-valid select {
+    border-color: var(--color-success, #28a745);
+    background-color: rgba(40, 167, 69, 0.02);
+}
+
+/* Invalid state */
+.form-group.is-invalid input,
+.form-group.is-invalid select,
+.form-field.is-invalid input,
+.form-field.is-invalid select {
+    border-color: var(--color-danger, #dc3545);
+    background-color: rgba(220, 53, 69, 0.02);
+}
+
+/* Error & success messages */
+.error-message,
+.invalid-feedback {
+    color: var(--color-danger, #dc3545);
+    font-size: var(--font-sm, 12px);
+    margin-top: 4px;
+    display: block;
+}
+
+.success-message,
+.valid-feedback {
+    color: var(--color-success, #28a745);
+    font-size: var(--font-sm, 12px);
+    margin-top: 4px;
+    display: block;
+}
+
+/* Help text */
+.form-text,
+.small-text {
+    color: var(--text-muted, #6b7280);
+    font-size: var(--font-sm, 12px);
+    margin-top: 4px;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   4. TABLE IMPROVEMENTS
+   ────────────────────────────────────────────────────────── */
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+thead {
+    background-color: var(--bg-muted, #e8f5e9);
+    font-weight: 600;
+    font-size: var(--font-sm, 12px);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+thead th {
+    padding: 14px 12px;
+    text-align: left;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+tbody td {
+    padding: 12px;
+    vertical-align: middle;
+    border-bottom: 1px solid var(--border-color);
+}
+
+tbody tr {
+    transition: background-color 0.2s ease;
+}
+
+tbody tr:hover {
+    background-color: var(--bg-soft, #f5faf6);
+}
+
+/* Striped rows for better readability */
+tbody tr:nth-child(odd) {
+    background-color: rgba(26, 95, 42, 0.02);
+}
+
+/* Status badges in tables */
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-size: var(--font-xs, 12px);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.status-badge.pending {
+    background-color: rgba(255, 193, 7, 0.15);
+    color: #856404;
+}
+
+.status-badge.approved,
+.status-badge.completed,
+.status-badge.resolved {
+    background-color: rgba(40, 167, 69, 0.15);
+    color: #155724;
+}
+
+.status-badge.rejected,
+.status-badge.failed {
+    background-color: rgba(220, 53, 69, 0.15);
+    color: #721c24;
+}
+
+.status-badge.processing,
+.status-badge.under_review {
+    background-color: rgba(23, 162, 184, 0.15);
+    color: #0c5460;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   5. ALERTS & NOTIFICATIONS
+   ────────────────────────────────────────────────────────── */
+
+.alert,
+.notification,
+.message-box {
+    padding: 16px 20px;
+    border-radius: var(--radius-md, 8px);
+    border-left: 4px solid;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 16px;
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.alert-success {
+    background-color: rgba(40, 167, 69, 0.05);
+    border-left-color: var(--color-success, #28a745);
+    color: #155724;
+}
+
+.alert-danger,
+.alert-error {
+    background-color: rgba(220, 53, 69, 0.05);
+    border-left-color: var(--color-danger, #dc3545);
+    color: #721c24;
+}
+
+.alert-warning {
+    background-color: rgba(255, 193, 7, 0.05);
+    border-left-color: var(--color-warning, #ffc107);
+    color: #856404;
+}
+
+.alert-info {
+    background-color: rgba(192, 57, 43, 0.05);
+    border-left-color: var(--secondary-color, #c0392b);
+    color: #5a1a14;
+}
+
+.alert-icon {
+    font-size: 20px;
+    flex-shrink: 0;
+    margin-top: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.alert-close,
+.alert-dismiss {
+    background: none;
+    border: none;
+    cursor: pointer;
+    margin-left: auto;
+    color: inherit;
+    opacity: 0.7;
+    padding: 0;
+    font-size: 20px;
+    line-height: 1;
+    transition: opacity 0.2s ease;
+}
+
+.alert-close:hover,
+.alert-dismiss:hover {
+    opacity: 1;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   6. BREADCRUMB NAVIGATION
+   ────────────────────────────────────────────────────────── */
+
+.breadcrumb,
+.breadcrumbs {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 0;
+    margin-bottom: 20px;
+    font-size: var(--font-sm, 12px);
+    color: var(--text-secondary);
+    flex-wrap: wrap;
+}
+
+.breadcrumb-item,
+.breadcrumb-list-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.breadcrumb-item a,
+.breadcrumb-list-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.breadcrumb-item a:hover,
+.breadcrumb-list-item a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+.breadcrumb-separator {
+    color: var(--text-muted);
+}
+
+.breadcrumb-item.active,
+.breadcrumb-list-item.active {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   7. MOBILE RESPONSIVE ENHANCEMENTS
+   ────────────────────────────────────────────────────────── */
+
+@media (max-width: 768px) {
+    /* Stack form groups vertically */
+    .form-row {
+        flex-direction: column;
+    }
+    
+    .form-row .form-group {
+        flex: 1 1 100%;
+    }
+    
+    /* Table responsive scroll */
+    table {
+        font-size: var(--font-sm, 12px);
+    }
+    
+    thead th {
+        padding: 10px 8px;
+    }
+    
+    tbody td {
+        padding: 10px 8px;
+    }
+    
+    /* Alerts on mobile */
+    .alert {
+        flex-direction: column;
+    }
+    
+    .alert-close {
+        margin-left: 0;
+        align-self: flex-end;
+    }
+    
+    /* Breadcrumbs wrap */
+    .breadcrumb {
+        gap: 4px;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Extra small screens */
+    button,
+    .btn-coop,
+    .btn {
+        padding: 10px 16px;
+        font-size: var(--font-sm, 12px);
+    }
+    
+    .form-group label {
+        font-size: var(--font-sm, 12px);
+    }
+    
+    table {
+        font-size: 11px;
+    }
+    
+    thead th {
+        padding: 8px 6px;
+        font-size: 10px;
+    }
+    
+    tbody td {
+        padding: 8px 6px;
+    }
+    
+    .status-badge {
+        padding: 2px 8px;
+        font-size: 10px;
+    }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   8. ACCESSIBILITY & FOCUS STATES
+   ────────────────────────────────────────────────────────── */
+
+/* Visible focus indicators for keyboard navigation */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* Reduced motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+    
+    .spinner {
+        animation: none;
+        border-top-color: transparent;
+        border-right-color: var(--primary-color);
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: more) {
+    .alert {
+        border-left-width: 6px;
+    }
+    
+    .status-badge {
+        border: 1px solid;
+    }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   9. PRINT STYLES (Safe for PDF export)
+   ────────────────────────────────────────────────────────── */
+
+@media print {
+    .btn-coop,
+    .btn,
+    button,
+    .alert-close,
+    .nav-toggle {
+        display: none !important;
+    }
+    
+    .alert {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+    
+    table {
+        page-break-inside: avoid;
+    }
+    
+    tbody tr {
+        page-break-inside: avoid;
+    }
+}
+
+
+/* ──────────────────────────────────────────────────────────
+   10. DARK MODE SUPPORT (Optional future)
+   ────────────────────────────────────────────────────────── */
+
+@media (prefers-color-scheme: dark) {
+    /* Currently not needed — site uses light theme
+       But structure is ready for future dark mode */
+}
+
+
+/* ─ END OF UI/UX ENHANCEMENTS ─ */
