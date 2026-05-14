@@ -1,0 +1,533 @@
+/**
+ * 🎨 DESIGN TOKENS — आकाश सहकारी (Phase 1 Uniformity)
+ * ═══════════════════════════════════════════════════════════
+ * यो file `universal.css` पछि load हुन्छ।
+ * Public + Member + Admin तीनैमा एउटै font/color/spacing।
+ *
+ * Admin → Settings → Primary Color बदले `_color-vars.php` ले
+ * यी variables override गर्छ (header मा inline <style> inject)।
+ * ═══════════════════════════════════════════════════════════
+ */
+
+:root {
+    /* 🎨 Brand (admin-overridable via _color-vars.php) */
+    --primary-color:    #1a5f2a;
+    --primary-dark:     #144a21;
+    --primary-light:    #2e8b4a;
+    --primary-glow:     #4caf6a;
+    /* rgba(var(--primary-rgb), α) — _color-vars.php ले Settings अनुसार override गर्छ */
+    --primary-rgb:      26, 95, 42;
+    --secondary-color:  #c0392b;   /* topbar */
+    --header-color:     #c0392b;   /* top utility/header strip */
+    --header-dark:      #922b21;
+    --secondary-dark:   #922b21;
+    --footer-color:     #1a5f2a;
+    --footer-dark:      var(--primary-dark);
+    --text-on-footer:   #ffffff;
+    /* Surface */
+    --bg-page:          #f8faf9;
+    --bg-card:          #ffffff;
+    --bg-soft:          #f5faf6;
+    --bg-muted:         #e8f5e9;
+
+    /* Text */
+    --text-primary:     #1a2e1f;
+    --text-secondary:   #4a5a4f;
+    --text-muted:       #6b7280;
+    --text-on-primary:  #ffffff;
+
+    /* Border & status */
+    --border-color:     #e5e7eb;
+    --border-soft:      #f0f0f0;
+    --color-success:    #28a745;
+    --color-warning:    #ffc107;
+    --color-danger:     #dc3545;
+    --color-info:       var(--secondary-color);
+
+    /* Shadows */
+    --shadow-primary:   0 4px 20px rgba(26,95,42,.16);
+
+    /* Container */
+    --container-max:    1280px;
+    --container-pad:    20px;
+
+    /* 📝 Unified Font Sizes — base 14px (0.875rem) for consistency */
+    --font-base:        14px;
+    --font-xs:          12px;   /* 0.75rem */
+    --font-sm:          13px;   /* 0.8125rem */
+    --font-md:          14px;   /* 0.875rem */
+    --font-lg:          16px;   /* 1rem */
+    --font-xl:          18px;   /* 1.125rem */
+    --font-2xl:         20px;   /* 1.25rem */
+    --font-3xl:         24px;   /* 1.5rem */
+    --font-4xl:         28px;   /* 1.75rem */
+    --font-5xl:         32px;   /* 2rem */
+
+    /* Note: --font-primary, --font-nepali, --space-*, --radius-*, --shadow-*
+       तपाईंको universal.css मा पहिले नै define छन्। हामी ती overwrite गर्दैनौँ। */
+}
+
+/* ── Universal base — सबै pages मा एकै font/bg ── */
+html, body {
+    font-family: var(--font-primary, 'Mukta', 'Noto Sans Devanagari', 'Segoe UI', sans-serif);
+    background: var(--bg-page);
+    color: var(--text-primary);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Form labels/input typography baseline सबै panel मा एउटै राख्ने */
+label, .form-label {
+    font-family: inherit;
+    letter-spacing: 0;
+}
+input, select, textarea, button {
+    font-family: inherit;
+}
+
+/* ── Universal Buttons (.btn-coop) ── */
+.btn-coop {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 10px 22px; border-radius: var(--radius-md, 10px);
+    font-family: inherit; font-weight: 600; font-size: .95rem;
+    border: none; cursor: pointer; text-decoration: none;
+    background: var(--primary-color); color: var(--text-on-primary);
+    transition: all .25s ease; box-shadow: var(--shadow-sm, 0 1px 4px rgba(0,0,0,.08));
+}
+.btn-coop:hover { background: var(--primary-dark); box-shadow: var(--shadow-primary); transform: translateY(-1px); color: var(--text-on-primary); }
+.btn-coop.btn-outline { background: transparent; color: var(--primary-color); border: 1.5px solid var(--primary-color); box-shadow: none; }
+.btn-coop.btn-outline:hover { background: var(--primary-color); color: var(--text-on-primary); }
+.btn-coop.btn-secondary { background: var(--secondary-color); }
+
+/* ── Universal Card (.card-coop) ── */
+.card-coop {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg, 16px);
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0,0,0,.08));
+    padding: var(--space-lg, 24px);
+    border: 1px solid var(--border-soft);
+}
+
+/* ── Universal Form Field (.field-coop) ── */
+.field-coop {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1.5px solid var(--border-color);
+    border-radius: var(--radius-md, 10px);
+    font-family: inherit; font-size: .95rem;
+    background: #fafbfa; color: var(--text-primary);
+    transition: border .2s, box-shadow .2s;
+}
+.field-coop:focus {
+    outline: none; border-color: var(--primary-color);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(26,95,42,.12);
+}
+
+/* ── Container ── */
+.container-coop {
+    max-width: var(--container-max);
+    margin: 0 auto; padding: 0 var(--container-pad);
+}
+
+/* ── Bootstrap overrides — site-wide consistency ── */
+.btn-primary, .bg-primary { background-color: var(--primary-color) !important; border-color: var(--primary-color) !important; color: var(--text-on-primary) !important; }
+.btn-primary:hover { background-color: var(--primary-dark) !important; border-color: var(--primary-dark) !important; color: var(--text-on-primary) !important; }
+.text-primary { color: var(--primary-color) !important; }
+.btn-success, .bg-success { background-color: var(--color-success) !important; border-color: var(--color-success) !important; }
+.text-success { color: var(--color-success) !important; }
+
+/* ════════════════════════════════════════════════════════════════
+   🌐 GLOBAL UNIFY PASS v2 — Bootstrap variants → site palette
+   Public + Admin + Member सबैमा एकनासको colour/icon/feedback
+   Admin (.main-content) र Member (.mem-wrapper) मा यिनको
+   higher-specificity scoped overrides अघि नै छन्, त्यसैले
+   यो pass मुख्यतः public-side को inconsistency मेटाउँछ।
+   ════════════════════════════════════════════════════════════════ */
+
+/* — Buttons (remaining variants) — */
+.btn-info {
+    background-color: #0e7490 !important;
+    border-color: #0e7490 !important;
+    color: #fff !important;
+    background-image: none !important;
+}
+.btn-info:hover, .btn-info:focus {
+    background-color: #0a5a73 !important; border-color: #0a5a73 !important; color: #fff !important;
+}
+.btn-warning {
+    background-color: #b45309 !important;
+    border-color: #b45309 !important;
+    color: #fff !important;
+    background-image: none !important;
+}
+.btn-warning:hover, .btn-warning:focus {
+    background-color: #92400e !important; border-color: #92400e !important; color: #fff !important;
+}
+.btn-danger {
+    background-color: #b91c1c !important;
+    border-color: #b91c1c !important;
+    color: #fff !important;
+    background-image: none !important;
+}
+.btn-danger:hover, .btn-danger:focus {
+    background-color: #991b1b !important; border-color: #991b1b !important; color: #fff !important;
+}
+.btn-outline-success { color: var(--color-success) !important; border-color: var(--color-success) !important; background: transparent !important; }
+.btn-outline-success:hover { background: var(--color-success) !important; color: #fff !important; }
+.btn-outline-info { color: #0e7490 !important; border-color: #0e7490 !important; background: transparent !important; }
+.btn-outline-info:hover { background: #0e7490 !important; color: #fff !important; }
+.btn-outline-warning { color: #b45309 !important; border-color: #b45309 !important; background: transparent !important; }
+.btn-outline-warning:hover { background: #b45309 !important; color: #fff !important; }
+.btn-outline-danger { color: #b91c1c !important; border-color: #b91c1c !important; background: transparent !important; }
+.btn-outline-danger:hover { background: #b91c1c !important; color: #fff !important; }
+
+/* — Bootstrap badge utilities → soft pill, theme-aligned — */
+.badge.bg-success, .badge.bg-primary {
+    background: #f0fdf4 !important; color: var(--primary-color) !important;
+    border: 1px solid #bbf7d0; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-info {
+    background: #ecfeff !important; color: #0e7490 !important;
+    border: 1px solid #a5f3fc; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-warning, .badge.bg-warning.text-dark {
+    background: #fffbeb !important; color: #b45309 !important;
+    border: 1px solid #fde68a; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-danger {
+    background: #fef2f2 !important; color: #b91c1c !important;
+    border: 1px solid #fecaca; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-secondary {
+    background: #f1f5f9 !important; color: #475569 !important;
+    border: 1px solid #cbd5e1; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-light {
+    background: #f8fafc !important; color: #334155 !important;
+    border: 1px solid #e2e8f0; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+.badge.bg-dark {
+    background: #1e293b !important; color: #fff !important;
+    border: 1px solid #1e293b; font-weight: 700; border-radius: 999px; padding: 4px 10px;
+}
+
+/* — Bootstrap alerts → theme palette — */
+.alert { border-radius: 12px; border-width: 1px; padding: 12px 14px; line-height: 1.5; }
+.alert-success, .alert-primary {
+    background: #f0fdf4 !important; color: var(--primary-color) !important;
+    border-color: #bbf7d0 !important;
+}
+.alert-info {
+    background: #ecfeff !important; color: #0e7490 !important;
+    border-color: #a5f3fc !important;
+}
+.alert-warning {
+    background: #fffbeb !important; color: #b45309 !important;
+    border-color: #fde68a !important;
+}
+.alert-danger {
+    background: #fef2f2 !important; color: #b91c1c !important;
+    border-color: #fecaca !important;
+}
+.alert-secondary {
+    background: #f1f5f9 !important; color: #475569 !important;
+    border-color: #cbd5e1 !important;
+}
+.alert-light {
+    background: #f8fafc !important; color: #334155 !important;
+    border-color: #e2e8f0 !important;
+}
+
+/* — Text utility colours — */
+.text-info    { color: #0e7490 !important; }
+.text-warning { color: #b45309 !important; }
+.text-danger  { color: #b91c1c !important; }
+.text-secondary { color: #475569 !important; }
+
+/* — Background utility colours (for inline pill/chip) — */
+.bg-info    { background-color: #0e7490 !important; color: #fff !important; }
+.bg-warning { background-color: #b45309 !important; color: #fff !important; }
+.bg-danger  { background-color: #b91c1c !important; color: #fff !important; }
+
+/* — Modal styling: scoped per-panel (admin: admin-modern.css, member: member.css).
+     Public pages keep Bootstrap default — radius polish from public-modern.css. — */
+
+/* — Form focus uses theme — */
+.form-control:focus, .form-select:focus, .form-check-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 .2rem rgba(var(--primary-rgb, 26,95,42), .18);
+}
+.form-check-input:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* ═══════════════════════════════════════════════════
+   ✅ CHECKBOX / RADIO / SWITCH — generous gap + clean align
+   Bootstrap's default 1.5em padding leaves a tight 4px gap
+   between the box and the label. Bump to 1.85em (≈10px gap).
+   Switches need more (2.8em) since the track is wider.
+   Inline variants get clear horizontal spacing so labels never
+   feel glued to checkboxes.
+   ═══════════════════════════════════════════════════ */
+.form-check {
+    padding-left: 1.85em !important;
+    min-height: 1.6rem !important;
+    margin-bottom: .35rem !important;
+}
+.form-check .form-check-input {
+    margin-left: -1.85em !important;
+    margin-top: .2em !important;
+    flex-shrink: 0;
+}
+.form-check-label {
+    cursor: pointer;
+    line-height: 1.45;
+    padding-left: 4px;
+}
+
+/* Inline (horizontal) — give breathing room between options */
+.form-check-inline {
+    display: inline-flex !important;
+    align-items: center !important;
+    margin-right: 1.1rem !important;
+    padding-left: 1.85em !important;
+    margin-bottom: .35rem !important;
+}
+.form-check-inline .form-check-input {
+    margin-left: -1.85em !important;
+    margin-top: 0 !important;
+    margin-right: .55em !important;
+}
+.form-check-inline .form-check-label { padding-left: 0; margin-bottom: 0; }
+
+/* Switch (toggle) — wider track needs wider gutter */
+.form-switch {
+    padding-left: 2.8em !important;
+    min-height: 1.6rem !important;
+}
+.form-switch .form-check-input {
+    margin-left: -2.8em !important;
+    width: 2.2em !important;
+    height: 1.15em !important;
+    margin-top: .15em !important;
+}
+.form-switch.form-check-inline {
+    padding-left: 2.8em !important;
+}
+.form-switch.form-check-inline .form-check-input {
+    margin-left: -2.8em !important;
+    margin-right: .55em !important;
+}
+
+/* Disabled state — clear visual cue */
+.form-check-input:disabled ~ .form-check-label,
+.form-check-input[disabled] ~ .form-check-label {
+    opacity: .55;
+    cursor: not-allowed;
+}
+
+/* Invalid state — keep theme-aligned */
+.form-check-input.is-invalid {
+    border-color: #b91c1c !important;
+}
+.form-check-input.is-invalid:checked {
+    background-color: #b91c1c !important;
+}
+
+/* — List-group active uses theme — */
+.list-group-item.active {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+/* — Pagination active state — */
+.page-item.active .page-link {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.page-link { color: var(--primary-color); }
+.page-link:hover { color: var(--primary-dark); }
+
+/* — Nav-pills active uses theme — */
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+    background-color: var(--primary-color);
+}
+
+/* — Spinner uses theme — */
+.spinner-border.text-primary, .spinner-grow.text-primary { color: var(--primary-color) !important; }
+
+/* — Progress bar uses theme — */
+.progress-bar { background-color: var(--primary-color); }
+
+/* ── Mobile responsive ── */
+@media (max-width: 768px) {
+    :root { --container-pad: 14px; }
+    .btn-coop { padding: 9px 18px; font-size: .9rem; }
+    .card-coop { padding: var(--space-md, 16px); }
+}
+
+/* ════════════════════════════════════════════════════════════════
+   🆕 DESIGN TOKEN EXPANSIONS — v6.5
+   Missing tokens from components/, stat-card, bottom-nav
+   ════════════════════════════════════════════════════════════════ */
+:root {
+    /* Accent — gold/amber: notices, live badges, special highlights */
+    --accent-color:         #f59e0b;
+    --accent-dark:          #b45309;
+    --accent-light:         #fbbf24;
+
+    /* Text on surfaces */
+    --text-on-secondary:    #ffffff;
+    --text-on-accent:       #1a1a1a;
+    --text-on-header:       #ffffff;
+    --text-light:           #6b7280;
+    --text-color:           #333333;
+
+    /* Admin panel tokens (used in admin-modern.css, readable everywhere) */
+    --adm-bg:               #f6f8f7;
+    --adm-surface:          #ffffff;
+    --adm-border:           #e8edeb;
+    --adm-text:             #1a2e1f;
+    --adm-muted:            #6b7280;
+    --adm-shadow-xs:        0 1px 3px rgba(0,0,0,.06);
+    --adm-shadow-sm:        0 2px 8px rgba(0,0,0,.08);
+    --adm-shadow-md:        0 6px 24px rgba(0,0,0,.10);
+    --adm-radius:           10px;
+    --adm-radius-sm:        7px;
+    --adm-success-bg:       #f0fdf4;
+    --adm-danger-bg:        #fef2f2;
+    --adm-warn-bg:          #fffbeb;
+    --adm-info-bg:          #f0fdf4;
+
+    /* Font weight helpers (fw-* utility) */
+    --fw-normal:            400;
+    --fw-medium:            500;
+    --fw-semibold:          600;
+    --fw-bold:              700;
+    --fw-extrabold:         800;
+
+    /* Z-index scale */
+    --z-bottom-nav:         800;
+    --z-topbar:             900;
+    --z-sidebar:            950;
+    --z-modal:              1040;
+    --z-toast:              1060;
+    --z-tooltip:            1070;
+
+    /* Transition defaults */
+    --transition-fast:      all .15s ease;
+    --transition-base:      all .2s ease;
+    --transition-slow:      all .35s ease;
+}
+
+/* fw-* font-weight utility (Bootstrap only has fw-bold/normal) */
+.fw-500, .fw-medium   { font-weight: 500 !important; }
+.fw-600, .fw-semibold { font-weight: 600 !important; }
+.fw-700               { font-weight: 700 !important; }
+.fw-800, .fw-extrabold{ font-weight: 800 !important; }
+
+/* Stat card animation — generic (used by stat-card.php component) */
+.stat-card {
+    transition: var(--transition-base);
+}
+.stat-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md, 0 4px 16px rgba(0,0,0,.10));
+}
+
+/* Accessible focus ring — consistent across all portals */
+:focus-visible {
+    outline: 2px solid var(--primary-color);
+    outline-offset: 2px;
+    border-radius: 4px;
+}
+
+/* ════════════════════════════════════════════════════════════════
+   📐 UTILITY CLASSES — Inline Style Replacements
+   ════════════════════════════════════════════════════════════════
+   89 files का सामान्य inline styles क replace गर्ने ready classes।
+   प्रयोग:  <div class="coop-flex coop-gap-md coop-mb-lg">
+*/
+
+/* Display & flex */
+.coop-flex      { display: flex; }
+.coop-flex-col  { display: flex; flex-direction: column; }
+.coop-flex-wrap { display: flex; flex-wrap: wrap; }
+.coop-grid      { display: grid; }
+.coop-inline    { display: inline-flex; align-items: center; }
+.coop-items-center  { align-items: center; }
+.coop-items-start   { align-items: flex-start; }
+.coop-justify-between { justify-content: space-between; }
+.coop-justify-center  { justify-content: center; }
+.coop-justify-end     { justify-content: flex-end; }
+
+/* Gap */
+.coop-gap-xs { gap: 4px; } .coop-gap-sm { gap: 8px; }
+.coop-gap-md { gap: 16px; } .coop-gap-lg { gap: 24px; }
+
+/* Margin */
+.coop-mt-xs { margin-top: 4px; } .coop-mt-sm { margin-top: 8px; }
+.coop-mt-md { margin-top: 16px; } .coop-mt-lg { margin-top: 24px; }
+.coop-mb-xs { margin-bottom: 4px; } .coop-mb-sm { margin-bottom: 8px; }
+.coop-mb-md { margin-bottom: 16px; } .coop-mb-lg { margin-bottom: 24px; }
+
+/* Padding */
+.coop-p-sm { padding: 8px; } .coop-p-md { padding: 16px; } .coop-p-lg { padding: 24px; }
+
+/* Text */
+.coop-text-primary   { color: var(--primary-color); }
+.coop-text-secondary { color: var(--text-secondary); }
+.coop-text-muted     { color: var(--text-muted); }
+.coop-text-success   { color: var(--color-success); }
+.coop-text-danger    { color: var(--color-danger); }
+.coop-text-mono      { font-family: 'Courier New', ui-monospace, monospace; }
+.coop-text-sm        { font-size: .85rem; } .coop-text-xs { font-size: .75rem; }
+.coop-text-lg        { font-size: 1.1rem; }
+.coop-font-bold      { font-weight: 700; } .coop-font-medium { font-weight: 500; }
+
+/* Background */
+.coop-bg-soft   { background: var(--bg-soft); }
+.coop-bg-muted  { background: var(--bg-muted); }
+.coop-bg-card   { background: var(--bg-card); }
+
+/* Borders & radius */
+.coop-rounded   { border-radius: var(--radius-md, 10px); }
+.coop-rounded-lg { border-radius: var(--radius-lg, 16px); }
+.coop-bordered  { border: 1px solid var(--border-color); }
+
+/* Width helpers */
+.coop-w-full { width: 100%; } .coop-mw-md { max-width: 480px; } .coop-mw-lg { max-width: 720px; }
+
+/* Code/pre uniform — credentials, tracking IDs etc. */
+.coop-code {
+    font-family: 'Courier New', ui-monospace, monospace;
+    background: var(--bg-soft);
+    padding: 4px 10px; border-radius: 6px;
+    font-size: .85rem; color: var(--text-primary);
+    letter-spacing: .5px;
+}
+
+/* Modal backdrop (use as: <div class="coop-modal" style="display:flex"...>) */
+.coop-modal {
+    position: fixed; inset: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 9999;
+    display: none;
+    align-items: center; justify-content: center;
+    padding: 20px; overflow-y: auto;
+}
+.coop-modal.is-open { display: flex; }
+
+/* ID-card monospace badge (member panel मा 8+ ठाउँमा छ) */
+.coop-id-badge {
+    font-family: 'Courier New', monospace;
+    font-size: .85rem; letter-spacing: 2px;
+    color: var(--primary-color); font-weight: 600;
+}
+
+/* Print-safe */
+@media print {
+    .coop-no-print, .no-print { display: none !important; }
+}
