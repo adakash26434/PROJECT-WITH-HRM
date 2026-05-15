@@ -1,0 +1,33 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Remove .php extension from URLs
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*)$ index.php?route=$1 [QSA,L]
+    
+    # Force HTTPS (uncomment if needed)
+    # RewriteCond %{HTTPS} off
+    # RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+    
+    # Set proper headers
+    Header set X-UA-Compatible "IE=edge"
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "DENY"
+</IfModule>
+
+# Enable PHP as module
+<IfModule mod_php7.c>
+    AddType application/x-httpd-php .php
+</IfModule>
+
+# Or for PHP 8.x
+<IfModule mod_php.c>
+    AddType application/x-httpd-php .php
+</IfModule>
+
+# Disable directory listing
+Options -Indexes
+
+# Set default index file
+DirectoryIndex index.php index.html
