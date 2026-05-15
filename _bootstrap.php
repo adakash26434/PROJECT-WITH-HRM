@@ -94,19 +94,73 @@ if (file_exists($dbConfigFile)) {
 // 4. LOAD CORE UTILITIES
 // ─────────────────────────────────────────────────
 
-// Helper functions
-if (file_exists(INCLUDES_DIR . '/helpers.php')) {
-    require_once INCLUDES_DIR . '/helpers.php';
+// Define CORE_DIR if not already defined
+if (!defined('CORE_DIR')) {
+    define('CORE_DIR', BASEDIR . '/core');
+}
+
+// Helper functions - check both locations for compatibility
+$helperFiles = [
+    CORE_DIR . '/helpers.php',
+    INCLUDES_DIR . '/helpers.php'
+];
+
+foreach ($helperFiles as $helperFile) {
+    if (file_exists($helperFile)) {
+        require_once $helperFile;
+        break;
+    }
 }
 
 // Authentication
-if (file_exists(INCLUDES_DIR . '/auth.php')) {
-    require_once INCLUDES_DIR . '/auth.php';
+$authFiles = [
+    CORE_DIR . '/auth.php',
+    INCLUDES_DIR . '/auth.php'
+];
+
+foreach ($authFiles as $authFile) {
+    if (file_exists($authFile)) {
+        require_once $authFile;
+        break;
+    }
 }
 
 // Validation
-if (file_exists(INCLUDES_DIR . '/validation.php')) {
-    require_once INCLUDES_DIR . '/validation.php';
+$validationFiles = [
+    CORE_DIR . '/validation.php',
+    INCLUDES_DIR . '/validation.php'
+];
+
+foreach ($validationFiles as $validationFile) {
+    if (file_exists($validationFile)) {
+        require_once $validationFile;
+        break;
+    }
+}
+
+// Config (contains requireAdminLogin and other auth functions)
+$configFiles = [
+    BASEDIR . '/includes/config.php',
+    BASEDIR . '/config/config.php',
+];
+
+foreach ($configFiles as $configFile) {
+    if (file_exists($configFile)) {
+        require_once $configFile;
+        break;
+    }
+}
+
+// Member auth (contains requireMemberLogin)
+$memberAuthFiles = [
+    BASEDIR . '/includes/member-auth.php',
+];
+
+foreach ($memberAuthFiles as $memberAuthFile) {
+    if (file_exists($memberAuthFile)) {
+        require_once $memberAuthFile;
+        break;
+    }
 }
 
 // ─────────────────────────────────────────────────
