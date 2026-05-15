@@ -1,0 +1,68 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║                                                                                ║
+║                     FIX DIRECTORY LISTING - DEPLOY NOW!                       ║
+║                                                                                ║
+║            Your site is showing folder listing instead of website             ║
+║                                                                                ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+QUICK FIX (5 MINUTES):
+═════════════════════════════════════════════════════════════════════════════════
+
+2 FILES TO COPY:
+
+1. index.php
+   From: /vercel/share/v0-project/index.php
+   To:   /public_html/index.php
+
+2. .htaccess
+   From: /vercel/share/v0-project/.htaccess
+   To:   /public_html/.htaccess
+
+═════════════════════════════════════════════════════════════════════════════════
+EASIEST METHOD - cPanel File Manager:
+═════════════════════════════════════════════════════════════════════════════════
+
+1. Login to cPanel
+2. Click "File Manager" 
+3. Go to "public_html" folder
+4. Right-click → "Create New File" → name it "index.php"
+5. Edit file → Paste content from /vercel/share/v0-project/index.php
+6. Right-click → "Create New File" → name it ".htaccess"
+7. Edit file → Paste content from /vercel/share/v0-project/.htaccess
+8. Refresh browser
+
+═════════════════════════════════════════════════════════════════════════════════
+SSH/TERMINAL METHOD:
+═════════════════════════════════════════════════════════════════════════════════
+
+cp /vercel/share/v0-project/index.php /public_html/index.php
+cp /vercel/share/v0-project/.htaccess /public_html/.htaccess
+
+═════════════════════════════════════════════════════════════════════════════════
+AFTER COPYING:
+═════════════════════════════════════════════════════════════════════════════════
+
+1. Clear browser cache (Ctrl+Shift+Delete or Cmd+Shift+Delete)
+2. Visit: https://hrm.bandanasigdel.com.np/
+3. Should see LOGIN PAGE (not folder listing)
+
+═════════════════════════════════════════════════════════════════════════════════
+IF STILL SHOWING FOLDER LISTING:
+═════════════════════════════════════════════════════════════════════════════════
+
+Check:
+  • .htaccess file exists (not .htaccess.txt)
+  • Both files in /public_html/ (root)
+  • File permissions are correct
+  • Contact hosting if mod_rewrite not enabled
+
+═════════════════════════════════════════════════════════════════════════════════
+
+File contains: index.php (router) + .htaccess (Apache config)
+
+These 2 files will make everything work!
+
+Detailed guide: FIX_DIRECTORY_LISTING.md
+
+═════════════════════════════════════════════════════════════════════════════════
