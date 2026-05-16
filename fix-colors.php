@@ -69,7 +69,7 @@ $filesToProcess = [
     'assets/css/style.css',
     'assets/css/coop-core.css',
     'assets/css/public-modern.css',
-    'assets/css/components.css',
+    'assets/css/unified-portal.css',
     'assets/css/design-tokens.css', // Check only, don't modify
     'admin/assets/admin.css',
     'member/assets/member.css',

@@ -1,0 +1,21 @@
+CSS / Global Theme — improved files (2026-05-15)
+================================================
+
+Yo folder ma theme unify gareko updated files chan.
+Live site (cPanel) ma "tare file" project root sanga MERGE/upload garnus.
+
+Naya file (sabai bhanda important):
+  includes/theme-assets.php
+
+Yo file lai upload garepachi aru sabai listed files pani overwrite garnus,
+natra purano CSS stack feri load huncha.
+
+Upload order suggestion:
+  1) includes/theme-assets.php
+  2) includes/config.php
+  3) includes/header.php, admin/includes/admin-header.php, member/includes/chrome.php
+  4) baaki login/verify/attend ra partial headers
+
+Test: Public home, Admin dashboard, Member portal, Login pages
+Hard refresh: Cmd+Shift+R
+

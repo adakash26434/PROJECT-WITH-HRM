@@ -1,15 +1,36 @@
-# v0 sandbox internal files
-__v0_runtime_loader.js
-__v0_devtools.tsx
-__v0_jsx-dev-runtime.ts
-.snowflake/
-.v0-trash/
-.vercel/
+# Runtime schema locks (server/cPanel मा मात्र बन्छन् — commit नगर्नुहोस्)
+.admin-schema.lock
+.schema.lock
+.member-schema.lock
 
-# Environment variables
-.env*.local
+# cPanel/Apache PHP error_log — server मा मात्र; repo/commit नगर्नुहोस्
+error_log
+**/error_log
 
-# Common ignores
-node_modules
-.next/
-.DS_Store
+# Zip artifacts (avoid accidental commit of bundles)
+*.zip
+
+# Clean zip output (scripts/package-clean-site.sh)
+dist/
+
+# Runtime/cache/upload data — keep folders on server, do not commit generated/user files
+cache/*
+!cache/.gitkeep
+logs/*
+!logs/.gitkeep
+assets/uploads/*
+!assets/uploads/.gitkeep
+
+# Credential vault auto-generated key (never commit)
+includes/.cred-master.key
+
+# Cron URL token (never commit)
+includes/.cron-token
+
+# Superadmin initial seed (never commit passwords)
+includes/superadmin-config.local.php
+
+# Per-server DB + license (never commit — avoids cPanel git merge conflicts)
+includes/database.local.php
+# Legacy single-file DB config on old installs — not tracked; pull will not touch it
+includes/database.php
