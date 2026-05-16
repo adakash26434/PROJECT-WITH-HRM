@@ -7,7 +7,7 @@ if (!function_exists('ensureHrmTables')) {
     function ensureHrmTables(PDO $db): void {
         static $done = false;
         if ($done) return;
-        $sqlFile = __DIR__ . '/../database/hrm_install.sql';
+        $sqlFile = dirname(__DIR__, 2) . '/database/hrm_install.sql';
         if (!is_file($sqlFile)) return;
         // Quick existence probe — skip heavy import on every page load.
         try {
