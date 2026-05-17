@@ -2000,3 +2000,99 @@ input[type="radio"]{
     font-size: 1.08rem !important;
   }
 }
+
+body.has-bottomnav .main-footer,
+body.has-bottomnav footer.main-footer,
+.main-footer,
+footer.main-footer,
+.site-footer{
+  color: rgba(255,255,255,.92) !important;
+}
+.main-footer .footer-widget h4,
+.main-footer .footer-widget h5,
+.main-footer .footer-widget h6,
+.main-footer .footer-title,
+.main-footer .footer-sahakari-name,
+.main-footer .copyright,
+.main-footer .developer,
+.main-footer p,
+.main-footer li,
+.main-footer span,
+.main-footer small,
+.main-footer i,
+.main-footer a:not(.btn),
+.main-footer .footer-links a,
+.main-footer .footer-contact li,
+.main-footer .footer-contact span,
+.main-footer .footer-policy-links a,
+.main-footer .visitor-counter,
+.main-footer .visitor-item{
+  color: rgba(255,255,255,.88) !important;
+}
+.main-footer .footer-widget h4,
+.main-footer .footer-widget h5,
+.main-footer .footer-widget h6,
+.main-footer .footer-title{
+  color: #fff !important;
+}
+.main-footer .footer-widget h4::after,
+.main-footer .footer-title::after{
+  background: rgba(255,255,255,.72) !important;
+}
+.main-footer .footer-links a:hover,
+.main-footer .footer-policy-links a:hover,
+.main-footer .developer a{
+  color: #fff !important;
+}
+.main-footer .footer-top{
+  background: color-mix(in srgb, var(--footer-color, var(--primary-color, #15803d)) 88%, #000) !important;
+}
+.main-footer .footer-bottom{
+  background: color-mix(in srgb, var(--footer-color, var(--primary-color, #15803d)) 72%, #000) !important;
+  border-top: 1px solid rgba(255,255,255,.12) !important;
+}
+.main-footer .visitor-item,
+.main-footer .footer-social a{
+  background: rgba(255,255,255,.12) !important;
+  border: 1px solid rgba(255,255,255,.18) !important;
+}
+@media (max-width: 899px){
+  body.has-bottomnav{
+    padding-bottom: calc(var(--mobile-bottom-nav-h, 64px) + 28px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.has-bottomnav .main-footer,
+  body.has-bottomnav footer.main-footer,
+  body.has-bottomnav .site-footer,
+  body.has-bottomnav .footer{
+    margin-bottom: 0 !important;
+    padding-bottom: calc(var(--mobile-bottom-nav-h, 64px) + 34px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .main-footer .footer-top{
+    padding-top: 34px !important;
+    padding-bottom: 24px !important;
+  }
+  .main-footer .footer-bottom{
+    padding-bottom: 16px !important;
+  }
+  .main-footer .footer-bottom .container{
+    gap: 8px 12px !important;
+    padding-bottom: 12px !important;
+  }
+  .main-footer .footer-policy-links,
+  .main-footer .visitor-counter{
+    justify-content: center !important;
+  }
+  .mob-bottomnav{
+    z-index: 1200 !important;
+    border-radius: 14px 14px 0 0 !important;
+  }
+  .qh-launcher,
+  .public-fab-help,
+  .whatsapp-float,
+  .useful-links-float,
+  .chatbot-widget,
+  #scrollAccessibilityPanel.sa-panel{
+    bottom: calc(var(--mobile-bottom-nav-h, 64px) + 18px + env(safe-area-inset-bottom, 0px)) !important;
+    z-index: 1050 !important;
+  }
+}
