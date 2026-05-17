@@ -1694,3 +1694,87 @@ select:focus{
     font-size: 1.12rem !important;
   }
 }
+
+@media (max-width: 899px){
+  :root{
+    --mobile-bottom-nav-h: 64px;
+    --mobile-bottom-gap: 12px;
+    --mobile-floating-bottom: calc(var(--mobile-bottom-nav-h) + var(--mobile-bottom-gap) + env(safe-area-inset-bottom, 0px));
+  }
+  body.has-bottomnav,
+  body.admin-shell{
+    padding-bottom: calc(var(--mobile-bottom-nav-h) + 18px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  body.has-bottomnav .main-footer,
+  body.has-bottomnav footer.main-footer,
+  body.has-bottomnav .site-footer,
+  body.has-bottomnav .footer,
+  body.admin-shell .admin-page,
+  body.admin-shell .page-content,
+  .mem-container{
+    padding-bottom: calc(var(--mobile-bottom-nav-h) + 22px + env(safe-area-inset-bottom, 0px)) !important;
+  }
+  .mob-bottomnav,
+  .admin-bottom-nav,
+  .mp-bottom-nav,
+  .mem-nav{
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    min-height: var(--mobile-bottom-nav-h) !important;
+    height: auto !important;
+    padding-top: 6px !important;
+    padding-bottom: calc(6px + env(safe-area-inset-bottom, 0px)) !important;
+    border-radius: 16px 16px 0 0 !important;
+    background: var(--bg-card, #fff) !important;
+    border-top: 1px solid color-mix(in srgb, var(--primary-color, #1a5f2a) 14%, #e5e7eb) !important;
+    box-shadow: 0 -8px 24px rgba(15,23,42,.12) !important;
+    z-index: 900 !important;
+  }
+  .mob-bn-item,
+  .admin-bottom-nav .admin-nav-item,
+  .mp-bottom-nav a,
+  .mp-bn-more,
+  .mem-nav-item{
+    min-height: 48px !important;
+    line-height: 1.1 !important;
+  }
+  .qh-launcher,
+  .public-fab-help,
+  .admin-fab-msg,
+  .whatsapp-float,
+  .useful-links-float,
+  .chatbot-widget{
+    bottom: var(--mobile-floating-bottom) !important;
+    z-index: 850 !important;
+  }
+  #publicChatPanel,
+  .chatbot-widget .chatbot-box,
+  .useful-links-float .useful-links-popup-box{
+    bottom: calc(var(--mobile-bottom-nav-h) + 82px + env(safe-area-inset-bottom, 0px)) !important;
+    max-height: calc(100vh - 170px) !important;
+  }
+  #scrollAccessibilityPanel.sa-panel{
+    bottom: var(--mobile-floating-bottom) !important;
+    left: 10px !important;
+    z-index: 840 !important;
+  }
+}
+@media (max-width: 420px){
+  .mob-bn-item,
+  .admin-bottom-nav .admin-nav-item,
+  .mp-bottom-nav a,
+  .mp-bn-more,
+  .mem-nav-item{
+    font-size: .62rem !important;
+    padding-left: 2px !important;
+    padding-right: 2px !important;
+  }
+  .mob-bn-item i,
+  .admin-bottom-nav .admin-nav-item i,
+  .mp-bottom-nav a i,
+  .mp-bn-more i,
+  .mem-nav-item i{
+    font-size: 1rem !important;
+  }
+}
