@@ -14,9 +14,11 @@ if (!function_exists('ensureHrmMessagesTable')) {
         if (!is_file($sqlFile)) { $done = true; return; }
         $sql = file_get_contents($sqlFile);
         if (!$sql) { $done = true; return; }
-        foreach (preg_split('/;\s*[\r\n]+/u', $sql) as $stmt) {
+        $sql = preg_replace('/^\s*--.*$/m', '', $sql);
+        $sql = preg_replace('~/\*.*?\*/~s', '', (string)$sql);
+        foreach (preg_split('/;\s*/u', (string)$sql) as $stmt) {
             $stmt = trim($stmt);
-            if ($stmt === '' || str_starts_with($stmt, '--')) continue;
+            if ($stmt === '') continue;
             try { $db->exec($stmt); } catch (\Throwable $e) {}
         }
         $done = true;
