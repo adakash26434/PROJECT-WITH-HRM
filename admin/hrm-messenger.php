@@ -63,26 +63,28 @@ if ($conv > 0) {
 }
 ?>
 <style>
-.msg-shell{display:grid;grid-template-columns:300px 1fr;gap:12px;height:calc(100vh - 180px);min-height:520px;}
+.msg-shell{display:grid;grid-template-columns:280px 1fr;gap:12px;height:calc(100vh - 190px);min-height:480px;}
 .msg-side{background:#fff;border:1px solid #e6e9ef;border-radius:14px;overflow:hidden;display:flex;flex-direction:column;}
 .msg-side-h{padding:12px 14px;border-bottom:1px solid #eef1f6;font-weight:700;color:var(--primary-color,#1a5f2a);}
 .msg-list{overflow:auto;flex:1;}
 .msg-thread{padding:10px 12px;border-bottom:1px solid #f1f3f7;text-decoration:none;color:#1f2937;display:flex;gap:10px;align-items:center;}
 .msg-thread:hover,.msg-thread.active{background:#f6faf7;}
-.msg-thread img{width:38px;height:38px;border-radius:50%;object-fit:cover;border:1px solid #e6e9ef;}
+.msg-thread img{width:34px;height:34px;border-radius:50%;object-fit:cover;border:1px solid #e6e9ef;}
 .msg-thread .nm{font-weight:600;font-size:13px;}
 .msg-thread .pv{font-size:12px;color:#6b7280;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:180px;}
 .msg-thread .badge{background:var(--primary-color,#1a5f2a);}
 .msg-pane{background:#fff;border:1px solid #e6e9ef;border-radius:14px;display:flex;flex-direction:column;overflow:hidden;}
 .msg-pane-h{padding:12px 14px;border-bottom:1px solid #eef1f6;display:flex;align-items:center;gap:10px;}
-.msg-pane-h img{width:42px;height:42px;border-radius:50%;object-fit:cover;}
+.msg-pane-h img{width:36px;height:36px;border-radius:50%;object-fit:cover;}
 .msg-body{flex:1;overflow:auto;padding:16px;background:#f7f9fc;}
-.msg-bubble{max-width:70%;padding:10px 12px;border-radius:14px;margin-bottom:8px;font-size:14px;line-height:1.4;}
+.msg-bubble{max-width:70%;padding:9px 11px;border-radius:13px;margin-bottom:8px;font-size:13px;line-height:1.4;}
 .msg-bubble.in{background:#fff;border:1px solid #e6e9ef;}
 .msg-bubble.out{background:var(--primary-color,#1a5f2a);color:#fff;margin-left:auto;}
 .msg-bubble .when{font-size:10.5px;opacity:.75;margin-top:4px;display:block;}
 .msg-form{padding:10px;border-top:1px solid #eef1f6;display:flex;gap:8px;}
 .msg-form textarea{flex:1;border:1px solid #e6e9ef;border-radius:10px;padding:8px 10px;resize:none;}
+.msg-form .btn{width:42px;height:42px;display:inline-flex;align-items:center;justify-content:center;padding:0;border-radius:11px;}
+.msg-form .btn i{font-size:.92rem;line-height:1;}
 @media(max-width:768px){.msg-shell{grid-template-columns:1fr;height:auto;}.msg-side{max-height:240px;}}
 </style>
 <div class="container-fluid p-3 p-md-4">

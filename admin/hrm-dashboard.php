@@ -3,6 +3,8 @@
  * 📊 HRM Dashboard — सहकारी मानव संशाधन
  * Headcount, status mix, expiring contracts/documents, recent joiners.
  */
+$currentPage = 'hrm-dashboard';
+$pageTitle   = 'HRM ड्यासबोर्ड';
 require_once __DIR__ . '/includes/admin-header.php';
 require_once __DIR__ . '/../includes/auth-roles.php';
 require_once __DIR__ . '/includes/hrm-tables.php';
@@ -11,41 +13,47 @@ require_role('admin');
 $db = getDB();
 ensureHrmTables($db);
 
-$total       = (int)$db->query("SELECT COUNT(*) FROM hrm_employees")->fetchColumn();
-$active      = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='active'")->fetchColumn();
-$probation   = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='probation'")->fetchColumn();
-$onLeave     = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='on_leave'")->fetchColumn();
-$exited      = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status IN ('resigned','terminated','retired')")->fetchColumn();
+$total = $active = $probation = $onLeave = $exited = 0;
+$expiringContracts = $expiringDocs = $recentJoiners = $byDept = [];
+try {
+    $total       = (int)$db->query("SELECT COUNT(*) FROM hrm_employees")->fetchColumn();
+    $active      = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='active'")->fetchColumn();
+    $probation   = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='probation'")->fetchColumn();
+    $onLeave     = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status='on_leave'")->fetchColumn();
+    $exited      = (int)$db->query("SELECT COUNT(*) FROM hrm_employees WHERE status IN ('resigned','terminated','retired')")->fetchColumn();
 
-$expiringContracts = $db->query(
-    "SELECT c.*, e.full_name_np, e.employee_code
-       FROM hrm_employee_contracts c
-       JOIN hrm_employees e ON e.id = c.employee_id
-      WHERE c.is_active=1 AND c.end_date_ad IS NOT NULL
-        AND c.end_date_ad BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 60 DAY)
-      ORDER BY c.end_date_ad ASC LIMIT 10"
-)->fetchAll(PDO::FETCH_ASSOC);
+    $expiringContracts = $db->query(
+        "SELECT c.*, e.full_name_np, e.employee_code
+           FROM hrm_employee_contracts c
+           JOIN hrm_employees e ON e.id = c.employee_id
+          WHERE c.is_active=1 AND c.end_date_ad IS NOT NULL
+            AND c.end_date_ad BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 60 DAY)
+          ORDER BY c.end_date_ad ASC LIMIT 10"
+    )->fetchAll(PDO::FETCH_ASSOC);
 
-$expiringDocs = $db->query(
-    "SELECT d.*, e.full_name_np, e.employee_code
-       FROM hrm_employee_documents d
-       JOIN hrm_employees e ON e.id = d.employee_id
-      WHERE d.expiry_date_ad IS NOT NULL
-        AND d.expiry_date_ad BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 90 DAY)
-      ORDER BY d.expiry_date_ad ASC LIMIT 10"
-)->fetchAll(PDO::FETCH_ASSOC);
+    $expiringDocs = $db->query(
+        "SELECT d.*, e.full_name_np, e.employee_code
+           FROM hrm_employee_documents d
+           JOIN hrm_employees e ON e.id = d.employee_id
+          WHERE d.expiry_date_ad IS NOT NULL
+            AND d.expiry_date_ad BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 90 DAY)
+          ORDER BY d.expiry_date_ad ASC LIMIT 10"
+    )->fetchAll(PDO::FETCH_ASSOC);
 
-$recentJoiners = $db->query(
-    "SELECT id, employee_code, full_name_np, designation, join_date_ad, status
-       FROM hrm_employees ORDER BY id DESC LIMIT 8"
-)->fetchAll(PDO::FETCH_ASSOC);
+    $recentJoiners = $db->query(
+        "SELECT id, employee_code, full_name_np, designation, join_date_ad, status
+           FROM hrm_employees ORDER BY id DESC LIMIT 8"
+    )->fetchAll(PDO::FETCH_ASSOC);
 
-$byDept = $db->query(
-    "SELECT d.name_np, COUNT(e.id) AS cnt
-       FROM hrm_departments d
-       LEFT JOIN hrm_employees e ON e.department_id = d.id AND e.status='active'
-      GROUP BY d.id ORDER BY d.sort_order, d.id"
-)->fetchAll(PDO::FETCH_ASSOC);
+    $byDept = $db->query(
+        "SELECT d.name_np, COUNT(e.id) AS cnt
+           FROM hrm_departments d
+           LEFT JOIN hrm_employees e ON e.department_id = d.id AND e.status='active'
+          GROUP BY d.id ORDER BY d.sort_order, d.id"
+    )->fetchAll(PDO::FETCH_ASSOC);
+} catch (Throwable $e) {
+    error_log('[hrm-dashboard] ' . $e->getMessage());
+}
 ?>
 <div class="admin-content">
     <div class="page-header stf-page-head">

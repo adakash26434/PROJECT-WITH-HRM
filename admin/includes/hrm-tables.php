@@ -16,11 +16,13 @@ if (!function_exists('ensureHrmTables')) {
         } catch (\Throwable $e) {}
         $sql = file_get_contents($sqlFile);
         if (!$sql) return;
+        $sql = preg_replace('/^\s*--.*$/m', '', $sql);
+        $sql = preg_replace('~/\*.*?\*/~s', '', (string)$sql);
         // Split on ; at line end (safe for our schema — no stored routines).
-        $stmts = preg_split('/;\s*[\r\n]+/u', $sql);
+        $stmts = preg_split('/;\s*/u', (string)$sql);
         foreach ($stmts as $s) {
             $s = trim($s);
-            if ($s === '' || str_starts_with($s, '--')) continue;
+            if ($s === '') continue;
             try { $db->exec($s); } catch (\Throwable $e) { /* ignore re-runs */ }
         }
         $done = true;

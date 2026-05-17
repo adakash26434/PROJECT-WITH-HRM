@@ -2,6 +2,8 @@
 /**
  * 👥 HRM — कर्मचारी सूची र थप/सम्पादन
  */
+$currentPage = 'hrm-employees';
+$pageTitle   = 'कर्मचारीहरू';
 require_once __DIR__ . '/includes/admin-header.php';
 require_once __DIR__ . '/../includes/auth-roles.php';
 require_once __DIR__ . '/../includes/election-tables.php';
