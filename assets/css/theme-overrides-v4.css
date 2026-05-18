@@ -2263,3 +2263,107 @@ footer.main-footer,
     background: rgba(15,23,42,.58) !important;
   }
 }
+
+/* Final compact stat/count card normalization — admin member, dashboard programs, welfare */
+.main-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card,
+.admin-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card{
+  min-height: 98px !important;
+  height: 98px !important;
+  padding: 12px 10px !important;
+  justify-content: center !important;
+  gap: 5px !important;
+}
+.main-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card > i,
+.admin-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card > i{
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  font-size: 1rem !important;
+  margin-bottom: 2px !important;
+  border-radius: 9px !important;
+}
+.main-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card .stat-value,
+.admin-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card .stat-value{
+  font-size: 1.08rem !important;
+  line-height: 1 !important;
+}
+.main-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card .stat-label,
+.admin-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card .stat-label{
+  min-height: 0 !important;
+  font-size: .68rem !important;
+  line-height: 1.2 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+#pane-programs .stat-card-row,
+#pane-programs .row:has(.stat-card){
+  display: grid !important;
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 12px !important;
+  align-items: stretch !important;
+  margin-bottom: 16px !important;
+}
+#pane-programs .stat-card-row > [class*="col-"],
+#pane-programs .row:has(.stat-card) > [class*="col-"]{
+  width: auto !important;
+  max-width: none !important;
+  flex: none !important;
+  padding: 0 !important;
+}
+#pane-programs .stat-card,
+#pane-programs .stat-card.stat-card-flat,
+#pane-programs .stat-card.stat-card-compact{
+  min-height: 72px !important;
+  height: 72px !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 10px !important;
+}
+#pane-programs .stat-card-icon{
+  width: 36px !important;
+  height: 36px !important;
+  min-width: 36px !important;
+  border-radius: 10px !important;
+  font-size: .95rem !important;
+}
+#pane-programs .stat-card-value{ font-size: 1.12rem !important; line-height: 1 !important; }
+#pane-programs .stat-card-label{ font-size: .7rem !important; line-height: 1.2 !important; }
+#pane-welfare .dash-section-title{ font-size: .98rem !important; }
+#pane-welfare .wf-summary-bar{
+  grid-template-columns: repeat(3, minmax(0, 1fr)) !important;
+  gap: 10px !important;
+  margin-bottom: 12px !important;
+}
+#pane-welfare .wf-stat-chip{
+  min-height: 66px !important;
+  padding: 10px 12px !important;
+  border-radius: 12px !important;
+  box-shadow: 0 4px 14px rgba(15,23,42,.05) !important;
+  align-items: center !important;
+}
+#pane-welfare .wf-stat-chip:hover{
+  transform: none !important;
+  box-shadow: 0 5px 16px rgba(15,23,42,.08) !important;
+}
+#pane-welfare .wf-stat-icon{
+  width: 34px !important;
+  height: 34px !important;
+  min-width: 34px !important;
+  border-radius: 10px !important;
+  font-size: .92rem !important;
+}
+#pane-welfare .wf-stat-chip .val{ font-size: 1.15rem !important; line-height: 1 !important; }
+#pane-welfare .wf-stat-chip .lbl{ font-size: .72rem !important; line-height: 1.2 !important; }
+@media (max-width: 768px){
+  #pane-programs .stat-card-row,
+  #pane-programs .row:has(.stat-card),
+  #pane-welfare .wf-summary-bar{ grid-template-columns: 1fr !important; }
+  .main-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card,
+  .admin-content .row.g-3.mb-4 > .col-6.col-md-3 > .stat-uniform-card{
+    height: 86px !important;
+    min-height: 86px !important;
+  }
+}
